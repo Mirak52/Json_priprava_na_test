@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PripravaNaTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+       
+        Title="MainWindow" Height="1080" Width="1920" MinHeight="350" MinWidth="500">
     <Grid>
-        
+        <ListView Margin="0,20,1000,0" Name="People">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="userId"  DisplayMemberBinding="{Binding userId}" />
+                    <GridViewColumn Header="id"  DisplayMemberBinding="{Binding id}" />
+                    <GridViewColumn Header="title"  DisplayMemberBinding="{Binding title}" />
+                    <GridViewColumn Header="completed"  DisplayMemberBinding="{Binding completed}" />
+                   
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="Error" FontSize="10" Content="Label" HorizontalAlignment="Left" Margin="993,397,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

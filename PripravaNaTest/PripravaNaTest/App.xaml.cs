@@ -13,5 +13,19 @@ namespace PripravaNaTest
     /// </summary>
     public partial class App : Application
     {
+        public static PersonDatabase _customers;
+
+        public static PersonDatabase DatabasePersons
+        {
+            get
+            {
+                if (_customers == null)
+                {
+                    var fileHelper = new FileHelper();
+                    _customers = new PersonDatabase(fileHelper.GetLocalFilePath("TodoSQLite.db3"));
+                }
+                return _customers;
+            }
+        }
     }
 }
