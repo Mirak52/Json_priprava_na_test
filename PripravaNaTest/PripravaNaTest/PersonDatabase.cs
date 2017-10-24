@@ -32,7 +32,7 @@ namespace PripravaNaTest
         }
         public Task<List<Person>> Add(string data)
         {
-            return database.QueryAsync<Person>("INSERT INTO [Person] (userId,id,title,completed) VALUES "+ data + " ");
+            return database.QueryAsync<Person>("INSERT INTO [Person] (userId,id,title,completed) VALUES "+ data);
         }
 
         // Query using SQL query string

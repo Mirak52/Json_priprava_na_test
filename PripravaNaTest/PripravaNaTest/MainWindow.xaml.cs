@@ -49,15 +49,9 @@ namespace PripravaNaTest
            
             foreach (var person in osoba)
             {
-                test = test + "(" +person.userId + "," + person.id+ "," + "\'" + person.title + "\'" + "," + "\'" + person.completed + "\'" + "),";
+                test = "(" +person.userId + "," + person.id+ "," + "\"" + person.title + "\"" + "," + "\"" + person.completed + "\"" + ")";
+                App.DatabasePersons.Add(test);
             }
-            
-            
-            test = test.Remove(test.Length - 1);
-
-            Error.Content = test;
-            App.DatabasePersons.Add(test);
         }
-      
     }
 }
