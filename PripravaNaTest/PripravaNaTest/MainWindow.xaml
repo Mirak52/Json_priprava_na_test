@@ -8,18 +8,23 @@
        
         Title="MainWindow" Height="1080" Width="1920" MinHeight="350" MinWidth="500">
     <Grid>
-        <ListView Margin="0,20,1000,0" Name="People">
+        <ListView Margin="0,20,1000,0" Name="Comments">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="userId"  DisplayMemberBinding="{Binding userId}" />
+                    <GridViewColumn Header="userId"  DisplayMemberBinding="{Binding postId}" />
                     <GridViewColumn Header="id"  DisplayMemberBinding="{Binding id}" />
-                    <GridViewColumn Header="title"  DisplayMemberBinding="{Binding title}" />
-                    <GridViewColumn Header="completed"  DisplayMemberBinding="{Binding completed}" />
+                    <GridViewColumn Header="title"  DisplayMemberBinding="{Binding name}" />
+                    <GridViewColumn Header="completed"  DisplayMemberBinding="{Binding email}" />
+                    <GridViewColumn Header="completed"  DisplayMemberBinding="{Binding body}" />
                    
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="Error" FontSize="10" Content="Label" HorizontalAlignment="Left" Margin="993,397,0,0" VerticalAlignment="Top"/>
-
+          <StackPanel Margin="917,20,35,494">
+            <TextBlock FontSize="30">Vlož ID komentáře!!</TextBlock>
+            <TextBox x:Name="IdGet" Height="30"></TextBox>
+            <Button Content="Zobrazit" HorizontalContentAlignment="Center" Height="30" Width="200" Click="Button_Click"/>
+            <Label x:Name="Error" Height="50"></Label>
+        </StackPanel>
     </Grid>
 </Window>

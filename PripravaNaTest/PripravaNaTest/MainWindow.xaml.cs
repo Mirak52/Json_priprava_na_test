@@ -27,31 +27,50 @@ namespace PripravaNaTest
         public MainWindow()
         {
             InitializeComponent();
-         
-
-            People.ItemsSource = GetPeople();
         }
-        public List<Person> GetPeople()
+        public List<Comment> GetComments()
         {
-            var client = new RestClient("http://jsonplaceholder.typicode.com/todos");
+            var client = new RestClient("http://jsonplaceholder.typicode.com/comments");
             var request = new RestRequest(Method.GET);
-            var res = client.Execute<List<Person>>(request);
+            request.AddHeader("location", "http://www.cpress.cz/");
+            request.AddParameter("postId", IdGet.Text);
+            var res = client.Execute<List<Comment>>(request);
             request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
             var queryResult = res.Data;
-            Save(queryResult);
-            return queryResult;
-
-        }
-        //(1,2,3),
-        public void Save(List<Person> osoba)
-        {
-            string test = null;
-           
-            foreach (var person in osoba)
+            if (res.ResponseStatus == ResponseStatus.Error)
             {
-                test = "(" +person.userId + "," + person.id+ "," + "\"" + person.title + "\"" + "," + "\"" + person.completed + "\"" + ")";
-                App.DatabasePersons.Add(test);
+                throw new System.ArgumentException("Chyba na serveru, zkontroluj URL");
+                //Error.Content= "Chyba na serveru, zkontroluj URL");
             }
+                return queryResult;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int n;
+            bool isNumeric = int.TryParse(IdGet.Text, out n);
+
+            if (isNumeric)
+            {
+                var comments = GetComments();
+                bool foundt = true;
+                if (comments.Count == 0)
+                {
+                    Comments.ItemsSource = "";
+                    Error.Content="Nebyl nalezen žádný komentář s tímto userId: " + IdGet.Text;
+                }
+                else
+                {
+                    Comments.ItemsSource = comments;
+                    Error.Content = "Uspešně nalezeno, počet komentářů s userId: "+ IdGet.Text+" je: " + comments.Count;
+                }
+            }
+            else
+            {
+                Comments.ItemsSource = "";
+                Error.Content = "Musíš zadat pouze čislice";
+                IdGet.Text = "";
+            }   
         }
     }
 }
