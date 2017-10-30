@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using RestSharp;
-
+using System.Web;
 namespace PripravaNaTest
 {
     /// <summary>
@@ -71,6 +71,25 @@ namespace PripravaNaTest
                 Error.Content = "Musíš zadat pouze čislice";
                 IdGet.Text = "";
             }   
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Midget dwarf = new Midget();
+            dwarf.name = "Gimly";
+            dwarf.beardLength = 30;
+            dwarf.height = 45;
+            dwarf.weight = 69;
+            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(dwarf);
+            var client = new RestClient("https://student.sps-prosek.cz/~bastlma14/Api/");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-type", "application/json");
+            request.AddParameter("application/json; charset=utf-8", jsonString, ParameterType.RequestBody);
+            var res = client.Execute(request);
+            var queryResult = res.Content;
+            Error.Content = queryResult;
+            Error1.Content = jsonString;
+
         }
     }
 }

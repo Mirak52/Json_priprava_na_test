@@ -25,6 +25,9 @@
             <TextBox x:Name="IdGet" Height="30"></TextBox>
             <Button Content="Zobrazit" HorizontalContentAlignment="Center" Height="30" Width="200" Click="Button_Click"/>
             <Label x:Name="Error" Height="50"></Label>
+            
+            <Button Content="SAVE" Click="Button_Click_1"/>
+            <Label x:Name="Error1" Height="50"></Label>
         </StackPanel>
     </Grid>
 </Window>
